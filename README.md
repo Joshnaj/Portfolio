@@ -20,8 +20,8 @@ your name, role, experience, certificates, skills, projects and contact links.
 Edit that file and save — the page updates instantly.
 
 - **Certificates:** copy one `{ ... }` block per certificate. Put the credential URL in `link` to show a "Verify →" button.
-- **Résumé:** put `resume.pdf` in the `public/` folder and set `resume: "/resume.pdf"`.
-- **Projects:** when you have a GitHub repo or live site, add the URLs to `code` and `live`.
+- **Résumé PDF:** `public/resume.pdf` is generated from `src/data.js`. After editing the data, run `node scripts/build-resume.mjs`, open the `resume.html` it creates in Chrome, choose **Print → Save as PDF** (A4, background graphics on) and save over `public/resume.pdf`.
+- **Projects:** the section stays hidden while the `projects` list is empty. Add an entry (with `live` / `code` links) and it appears automatically.
 
 ## 3. Put it online (free)
 

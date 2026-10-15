@@ -14,10 +14,14 @@ export const profile = {
     { value: "4.6+", label: "years SAP ABAP" },
     { value: "3", label: "markets rolled out" },
   ],
+  // Longer summary used in the downloadable résumé
+  summary:
+    "SAP ABAP developer with 6.5 years of IT experience, including 4.6+ years of dedicated ABAP development on S/4HANA. Delivered the end-to-end FCSD Pinnacle S/4HANA implementation with a FICO focus, and now builds procurement workflows and Fiori back-ends as a Senior ABAP Consultant at Deloitte. Hands-on with RAP, OData (V2/V4) and CDS modelling, with a track record of consolidating complex legacy interfaces into a single source of truth. Committed to Clean Core principles and scalable, high-performance solutions.",
+  website: "https://joshnaj.github.io/Portfolio/",
   email: "jmuragamala@gmail.com",
   linkedin: "https://www.linkedin.com/in/msjyothsna",
   github: "https://github.com/Joshnaj",
-  resume: "", // e.g. "resume.pdf" — put the PDF in the /public folder
+  resume: "resume.pdf", // lives in the /public folder
 };
 
 export const experience = [
@@ -27,10 +31,14 @@ export const experience = [
     client: "BSH (Procurement)",
     period: "May 2026 — Present",
     points: [
-      "Designed and optimised automated approval workflows in S/4HANA with Flexible Workflow and BRFplus, cutting manual intervention and speeding up procurement cycle times.",
-      "Debugged and performance-tuned complex custom ABAP applications, resolving critical runtime errors to keep systems stable and S/4HANA-compatible.",
+      "Built a two-level approval process on SAP Flexible Workflow for supplier-submitted records: event-driven start from the vendor portal, Fiori Inbox decisions, email notifications and application-log error tracking.",
+      "Extended approver determination so first-level approvals route to the responsible purchasing-group owner instead of a fixed team.",
+      "Extended OData V2 services for the Smart Purchasing Fiori app — create/update with business validations, plus a new Excel export with 16 additional columns built alongside the original so existing users were unaffected.",
+      "Built CDS-based value helps for Flexible Workflow conditions in the Manage Workflows app.",
+      "Resolved a production dump in an editable ALV maintenance program after an S/4HANA upgrade, and fixed WebDynpro data-binding defects between the supplier portal screen and back-end tables.",
+      "Wrote technical specifications and planned the migration of legacy R/3 programs to S/4HANA.",
     ],
-    tech: ["Flexible Workflow", "BRFplus", "ABAP", "S/4HANA", "Performance tuning"],
+    tech: ["Flexible Workflow", "OData V2", "CDS", "Fiori", "ALV", "WebDynpro", "S/4HANA"],
   },
   {
     role: "SAP ABAP S/4HANA Developer",
@@ -65,14 +73,6 @@ export const experience = [
 // kind: "Certification" | "Award" | "Education" | "Training"
 export const certificates = [
   {
-    kind: "Certification",
-    title: "SAP ABAP Training Certification",
-    issuer: "Unogeeks",
-    date: "",
-    link: "",
-    accent: "#7cf5c4",
-  },
-  {
     kind: "Award",
     title: "Employee of the Month",
     issuer: "Ford Motor Company",
@@ -81,20 +81,20 @@ export const certificates = [
     accent: "#ffb38a",
   },
   {
-    kind: "Training",
-    title: "SWIFT Essentials",
-    issuer: "Deloitte",
-    date: "In progress",
-    link: "",
-    accent: "#c49bff",
-  },
-  {
     kind: "Education",
-    title: "Bachelor of Technology",
+    title: "B.Tech, Electronics & Communication",
     issuer: "MITS, Madanapalle",
-    date: "",
+    date: "2019",
     link: "",
     accent: "#8ab4ff",
+  },
+  {
+    kind: "Training",
+    title: "SAP ABAP Training",
+    issuer: "Unogeeks",
+    date: "",
+    link: "",
+    accent: "#7cf5c4",
   },
 ];
 
@@ -107,30 +107,14 @@ export const skills = {
   "Ways of working": ["Clean Core", "Agile / Scrum"],
 };
 
-export const projects = [
-  {
-    title: "FCSD Pinnacle",
-    status: "Key project · Ford",
-    description:
-      "End-to-end S/4HANA implementation with a FICO focus for Ford's sales division, rolled out across 3 international markets.",
-    tech: ["S/4HANA", "FICO", "CDS", "RAP"],
-    live: "",
-    code: "",
-  },
-  {
-    title: "Daily Log",
-    status: "In progress",
-    description: "A simple, calm website for tracking daily activities — a lighter alternative to Notion.",
-    tech: ["React"],
-    live: "",
-    code: "",
-  },
-  {
-    title: "Productivity Launcher",
-    status: "Planned",
-    description: "An Android home-screen launcher designed around focus and fewer distractions.",
-    tech: ["Android"],
-    live: "",
-    code: "",
-  },
-];
+// Projects are hidden on the site while this list is empty.
+// Add entries like this once a project is built:
+// {
+//   title: "Daily Log",
+//   status: "Live",
+//   description: "A simple, calm website for tracking daily activities.",
+//   tech: ["React"],
+//   live: "https://...",
+//   code: "https://github.com/Joshnaj/...",
+// },
+export const projects = [];

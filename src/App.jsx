@@ -12,7 +12,13 @@ const reveal = {
 };
 
 function Nav() {
-  const links = ["experience", "certificates", "skills", "projects", "contact"];
+  const links = [
+    ["experience", "Experience"],
+    ["education", "Education"],
+    ["skills", "Skills"],
+    ...(projects.length ? [["projects", "Projects"]] : []),
+    ["contact", "Contact"],
+  ];
   return (
     <nav className="nav">
       <a href="#top" className="logo">
@@ -20,9 +26,12 @@ function Nav() {
         <span>.</span>
       </a>
       <div className="nav-links">
-        {links.map((l) => (
-          <a key={l} href={`#${l}`}>{l}</a>
+        {links.map(([id, label]) => (
+          <a key={id} href={`#${id}`}>{label}</a>
         ))}
+        {profile.resume && (
+          <a className="nav-resume" href={profile.resume} download>Résumé ↓</a>
+        )}
       </div>
     </nav>
   );
@@ -61,7 +70,7 @@ function Hero() {
         )}
         <motion.div className="cta" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
           <a className="btn primary" href="#experience">View my work</a>
-          <a className="btn" href="#contact">Get in touch</a>
+          {profile.resume && <a className="btn" href={profile.resume} download>Download résumé</a>}
         </motion.div>
       </div>
       <a href="#experience" className="scroll-hint" aria-label="Scroll down"><span /></a>
@@ -146,8 +155,8 @@ function TiltCard({ cert, i }) {
 
 function Certificates() {
   return (
-    <section id="certificates" className="section">
-      <SectionTitle index="02">Certificates & Awards</SectionTitle>
+    <section id="education" className="section">
+      <SectionTitle index="02">Awards & Education</SectionTitle>
       <div className="cert-grid">
         {certificates.map((c, i) => <TiltCard key={i} cert={c} i={i} />)}
       </div>
@@ -174,6 +183,7 @@ function Skills() {
 }
 
 function Projects() {
+  if (!projects.length) return null;
   return (
     <section id="projects" className="section">
       <SectionTitle index="04">Projects</SectionTitle>
@@ -199,14 +209,14 @@ function Projects() {
 function Contact() {
   return (
     <section id="contact" className="section contact">
-      <SectionTitle index="05">Contact</SectionTitle>
+      <SectionTitle index={projects.length ? "05" : "04"}>Contact</SectionTitle>
       <motion.div {...reveal}>
         <p className="contact-lead">Open to new opportunities and conversations about SAP and web development.</p>
         <a className="email" href={`mailto:${profile.email}`}>{profile.email}</a>
         <div className="socials">
           {profile.linkedin && <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>}
           {profile.github && <a href={profile.github} target="_blank" rel="noreferrer">GitHub</a>}
-          {profile.resume && <a href={profile.resume} target="_blank" rel="noreferrer">Résumé</a>}
+          {profile.resume && <a href={profile.resume} download>Résumé (PDF)</a>}
         </div>
       </motion.div>
       <footer>© {new Date().getFullYear()} {profile.name} · Built with React & Three.js</footer>
