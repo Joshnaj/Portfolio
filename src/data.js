@@ -3,20 +3,34 @@
 //  Everything on the site is read from here.
 // ─────────────────────────────────────────────────────────────
 
+// ── Experience is calculated from these start dates, so the numbers
+//    on the site and in the résumé stay up to date on their own.
+export const careerStart = "2019-11"; // first IT job (Ford, PL/SQL)
+export const sapStart = "2021-11"; // first SAP ABAP role (Ford)
+
+function yearsSince(start, today = new Date()) {
+  const [y, m] = start.split("-").map(Number);
+  const months = (today.getFullYear() - y) * 12 + (today.getMonth() + 1 - m);
+  return Math.floor((months / 12) * 10) / 10; // one decimal, rounded down
+}
+const fmt = (n) => (Number.isInteger(n) ? String(n) : n.toFixed(1));
+export const itYears = fmt(yearsSince(careerStart));
+export const sapYears = fmt(yearsSince(sapStart));
+
 export const profile = {
   name: "Jyothsna Muragamala",
   role: "Senior SAP ABAP Consultant",
   company: "Deloitte",
   tagline:
-    "6.5 years in IT, 4.6+ of them building on SAP S/4HANA. I specialise in RAP, OData and CDS for Finance (FICO), Logistics and Procurement, with a focus on Clean Core and turning tangled legacy interfaces into a single source of truth.",
+    `${itYears} years in IT, ${sapYears} of them building on SAP S/4HANA. I specialise in RAP, OData and CDS for Finance (FICO), Logistics and Procurement, with a focus on Clean Core and turning tangled legacy interfaces into a single source of truth.`,
   stats: [
-    { value: "6.5", label: "years in IT" },
-    { value: "4.6+", label: "years SAP ABAP" },
+    { value: itYears, label: "years in IT" },
+    { value: sapYears, label: "years SAP ABAP" },
     { value: "3", label: "markets rolled out" },
   ],
   // Longer summary used in the downloadable résumé
   summary:
-    "SAP ABAP developer with 6.5 years of IT experience, including 4.6+ years of dedicated ABAP development on S/4HANA. Delivered the end-to-end FCSD Pinnacle S/4HANA implementation with a FICO focus, and now builds procurement workflows and Fiori back-ends as a Senior ABAP Consultant at Deloitte. Hands-on with RAP, OData (V2/V4) and CDS modelling, with a track record of consolidating complex legacy interfaces into a single source of truth. Committed to Clean Core principles and scalable, high-performance solutions.",
+    `SAP ABAP developer with ${itYears} years of IT experience, including ${sapYears} years of dedicated ABAP development on S/4HANA. Delivered the end-to-end FCSD Pinnacle S/4HANA implementation with a FICO focus, and now builds procurement workflows and Fiori back-ends as a Senior ABAP Consultant at Deloitte. Hands-on with RAP, OData (V2/V4) and CDS modelling, with a track record of consolidating complex legacy interfaces into a single source of truth. Committed to Clean Core principles and scalable, high-performance solutions.`,
   website: "https://joshnaj.github.io/Portfolio/",
   contactLine: "Happy to connect about SAP S/4HANA, RAP, Fiori and Clean Core development.",
   // Shown as the highlighted strip at the top of Skills

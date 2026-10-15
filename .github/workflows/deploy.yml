@@ -4,6 +4,10 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Rebuild on the 1st of every month so the experience figures
+  # in the résumé PDF stay current.
+  schedule:
+    - cron: "17 3 1 * *"
 
 permissions:
   contents: read
@@ -24,6 +28,12 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Install fonts and browser for the résumé PDF
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq fonts-inter
+          npx playwright install --with-deps chromium-headless-shell
+      - name: Generate résumé PDF
+        run: npm run resume
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
