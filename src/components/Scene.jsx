@@ -61,9 +61,9 @@ function Blocks() {
 // on the right on wide screens / up and smaller on phones
 function Rig({ children }) {
   const ref = useRef();
-  const { viewport } = useThree();
-  const wide = viewport.width > 7;
-  const position = wide ? [viewport.width * 0.22, 0, 0] : [0, viewport.height * 0.26, -2];
+  const { viewport, size } = useThree();
+  const wide = size.width > 760;
+  const position = wide ? [viewport.width * 0.22, 0, 0] : [0, 0, -2];
   const scale = wide ? 1 : 0.75;
   useFrame((state) => {
     const { x, y } = state.pointer;

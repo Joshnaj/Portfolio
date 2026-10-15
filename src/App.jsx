@@ -49,6 +49,16 @@ function Hero() {
         <motion.p className="tagline" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
           {profile.tagline}
         </motion.p>
+        {profile.stats && (
+          <motion.dl className="stats" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }}>
+            {profile.stats.map((s) => (
+              <div key={s.label}>
+                <dt>{s.value}</dt>
+                <dd>{s.label}</dd>
+              </div>
+            ))}
+          </motion.dl>
+        )}
         <motion.div className="cta" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
           <a className="btn primary" href="#experience">View my work</a>
           <a className="btn" href="#contact">Get in touch</a>
@@ -83,6 +93,7 @@ function Experience() {
                   {job.company}
                   {job.client && <span className="client"> · Client: {job.client}</span>}
                 </p>
+                {job.focus && <p className="focus">{job.focus}</p>}
               </div>
               <span className="period">{job.period}</span>
             </div>
@@ -114,7 +125,10 @@ function TiltCard({ cert, i }) {
   const Inner = (
     <div ref={ref} className="cert" style={{ "--accent": cert.accent }} onMouseMove={onMove} onMouseLeave={onLeave}>
       <div className="cert-glow" />
-      <div className="cert-badge">✦</div>
+      <div className="cert-top">
+        <div className="cert-badge">✦</div>
+        {cert.kind && <span className="cert-kind">{cert.kind}</span>}
+      </div>
       <h4>{cert.title}</h4>
       <p className="issuer">{cert.issuer}</p>
       <div className="cert-foot">
@@ -133,7 +147,7 @@ function TiltCard({ cert, i }) {
 function Certificates() {
   return (
     <section id="certificates" className="section">
-      <SectionTitle index="02">Certificates</SectionTitle>
+      <SectionTitle index="02">Certificates & Awards</SectionTitle>
       <div className="cert-grid">
         {certificates.map((c, i) => <TiltCard key={i} cert={c} i={i} />)}
       </div>
