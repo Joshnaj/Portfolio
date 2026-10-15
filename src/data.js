@@ -41,7 +41,7 @@ export const experience = [
     client: "BSH (Procurement)",
     period: "May 2026 — Present",
     points: [
-      "Built a two-level approval process on SAP Flexible Workflow for supplier-submitted records: event-driven start from the vendor portal, Fiori Inbox decisions, email notifications and application-log error tracking.",
+      "Built a two-level approval process on SAP Flexible Workflow for supplier-submitted records, now used by around 78 suppliers and well received by the business team: event-driven start from the vendor portal, Fiori Inbox decisions, email notifications and application-log error tracking.",
       "Extended approver determination so first-level approvals route to the responsible purchasing-group owner instead of a fixed team.",
       "Extended OData V2 services for the Smart Purchasing Fiori app — create/update with business validations, plus a new Excel export with 16 additional columns built alongside the original so existing users were unaffected.",
       "Built CDS-based value helps for Flexible Workflow conditions in the Manage Workflows app.",
