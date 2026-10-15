@@ -1,4 +1,4 @@
-import { lazy, Suspense, useRef } from "react";
+import { lazy, Suspense, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { profile, experience, certificates, skills, projects } from "./data.js";
 
@@ -87,6 +87,26 @@ function SectionTitle({ index, children }) {
   );
 }
 
+const VISIBLE_POINTS = 4;
+
+function Points({ points }) {
+  const [open, setOpen] = useState(false);
+  const extra = points.length - VISIBLE_POINTS;
+  const shown = open || extra <= 0 ? points : points.slice(0, VISIBLE_POINTS);
+  return (
+    <>
+      <ul>
+        {shown.map((p, j) => <li key={j}>{p}</li>)}
+      </ul>
+      {extra > 0 && (
+        <button className="more" onClick={() => setOpen(!open)} aria-expanded={open}>
+          {open ? "Show less" : `Show ${extra} more`}
+        </button>
+      )}
+    </>
+  );
+}
+
 function Experience() {
   return (
     <section id="experience" className="section">
@@ -106,9 +126,7 @@ function Experience() {
               </div>
               <span className="period">{job.period}</span>
             </div>
-            <ul>
-              {job.points.map((p, j) => <li key={j}>{p}</li>)}
-            </ul>
+            <Points points={job.points} />
             <div className="tags">
               {job.tech.map((t) => <span key={t} className="tag">{t}</span>)}
             </div>
@@ -168,6 +186,16 @@ function Skills() {
   return (
     <section id="skills" className="section">
       <SectionTitle index="03">Skills</SectionTitle>
+      {profile.core && (
+        <motion.div className="core" {...reveal}>
+          {profile.core.map((c) => (
+            <div key={c.name} className="core-item">
+              <strong>{c.name}</strong>
+              <span>{c.note}</span>
+            </div>
+          ))}
+        </motion.div>
+      )}
       <div className="skill-groups">
         {Object.entries(skills).map(([group, list]) => (
           <motion.div key={group} className="skill-group" {...reveal}>
@@ -211,7 +239,7 @@ function Contact() {
     <section id="contact" className="section contact">
       <SectionTitle index={projects.length ? "05" : "04"}>Contact</SectionTitle>
       <motion.div {...reveal}>
-        <p className="contact-lead">Open to new opportunities and conversations about SAP and web development.</p>
+        <p className="contact-lead">{profile.contactLine}</p>
         <a className="email" href={`mailto:${profile.email}`}>{profile.email}</a>
         <div className="socials">
           {profile.linkedin && <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>}

@@ -5,7 +5,7 @@
 
 export const profile = {
   name: "Jyothsna Muragamala",
-  role: "SAP ABAP S/4HANA Developer",
+  role: "Senior SAP ABAP Consultant",
   company: "Deloitte",
   tagline:
     "6.5 years in IT, 4.6+ of them building on SAP S/4HANA. I specialise in RAP, OData and CDS for Finance (FICO), Logistics and Procurement, with a focus on Clean Core and turning tangled legacy interfaces into a single source of truth.",
@@ -18,6 +18,16 @@ export const profile = {
   summary:
     "SAP ABAP developer with 6.5 years of IT experience, including 4.6+ years of dedicated ABAP development on S/4HANA. Delivered the end-to-end FCSD Pinnacle S/4HANA implementation with a FICO focus, and now builds procurement workflows and Fiori back-ends as a Senior ABAP Consultant at Deloitte. Hands-on with RAP, OData (V2/V4) and CDS modelling, with a track record of consolidating complex legacy interfaces into a single source of truth. Committed to Clean Core principles and scalable, high-performance solutions.",
   website: "https://joshnaj.github.io/Portfolio/",
+  contactLine: "Happy to connect about SAP S/4HANA, RAP, Fiori and Clean Core development.",
+  // Shown as the highlighted strip at the top of Skills
+  core: [
+    { name: "RAP", note: "Managed & unmanaged" },
+    { name: "CDS", note: "Views, annotations, value helps" },
+    { name: "OData", note: "V2 & V4, SEGW, service bindings" },
+    { name: "Flexible Workflow", note: "Approvals, agent rules, BRFplus" },
+    { name: "FICO", note: "AR · AP · GL processes" },
+    { name: "Clean Core", note: "Extensibility done the S/4 way" },
+  ],
   email: "jmuragamala@gmail.com",
   linkedin: "https://www.linkedin.com/in/msjyothsna",
   github: "https://github.com/Joshnaj",
@@ -49,9 +59,9 @@ export const experience = [
       "Key developer on FCSD Pinnacle, a full-cycle S/4HANA implementation for Finance (FICO), from blueprint to go-live, rolled out across 3 international markets on one core codebase.",
       "Led the consolidation of legacy Goods Issue, Accounts Receivable and Goods Receipt flows into one IERP interface — a single source of truth for global finance.",
       "Built 3 RAP applications (managed scenario) for FICO data management.",
+      "Automated monthly TPOP finance reports (.xlsx to AL11), removing 99% of the manual effort.",
       "Delivered CDS views over OData V4 and Fiori tiles for real-time in-transit material tracking.",
       "Automated daily exchange-rate loads from GCR into S/4HANA (TCURR) with BAPI_EXCHRATE_CREATE.",
-      "Automated monthly TPOP finance reports (.xlsx to AL11), removing 99% of the manual effort.",
       "Built RFC-based real-time Bill of Distribution transfer between S/4HANA and ECC with full data integrity through go-live.",
     ],
     tech: ["RAP", "CDS", "OData V4", "Fiori", "FICO", "BAPI", "RFC", "AMDP"],
