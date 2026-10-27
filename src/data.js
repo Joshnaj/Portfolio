@@ -17,16 +17,43 @@ const fmt = (n) => (Number.isInteger(n) ? String(n) : n.toFixed(1));
 export const itYears = fmt(yearsSince(careerStart));
 export const sapYears = fmt(yearsSince(sapStart));
 
+// ── Each job has a start (and end) month. The period text and the
+//    duration ("4 yrs 6 mos") are worked out from them, so the
+//    current job keeps counting up on its own. Leave `end` out for "Present".
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const label = (ym) => {
+  const [y, m] = ym.split("-").map(Number);
+  return `${MONTHS[m - 1]} ${y}`;
+};
+function duration(start, end, today = new Date()) {
+  const [sy, sm] = start.split("-").map(Number);
+  const [ey, em] = end ? end.split("-").map(Number) : [today.getFullYear(), today.getMonth() + 1];
+  const total = (ey - sy) * 12 + (em - sm) + 1; // both months count
+  const y = Math.floor(total / 12), m = total % 12;
+  const part = (n, w) => (n ? `${n} ${w}${n > 1 ? "s" : ""}` : "");
+  return [part(y, "yr"), part(m, "mo")].filter(Boolean).join(" ") || "1 mo";
+}
+const withDates = (job) => ({
+  ...job,
+  current: !job.end,
+  period: `${label(job.start)} — ${job.end ? label(job.end) : "Present"}`,
+  duration: duration(job.start, job.end),
+});
+
 export const profile = {
   name: "Jyothsna Muragamala",
   role: "Senior SAP ABAP Consultant",
   company: "Deloitte",
+  // Big line at the top of the home page
+  headline: "I turn complex procurement & finance processes into",
+  headlineAccent: "clean S/4HANA code.",
   tagline:
     `${itYears} years in IT, ${sapYears} of them building on SAP S/4HANA. I specialise in RAP, OData and CDS for Finance (FICO), Logistics and Procurement, with a focus on Clean Core and turning tangled legacy interfaces into a single source of truth.`,
   stats: [
     { value: itYears, label: "years in IT" },
     { value: sapYears, label: "years SAP ABAP" },
     { value: "3", label: "markets rolled out" },
+    { value: "78", label: "suppliers on my workflow" },
   ],
   // Longer summary used in the downloadable résumé
   summary:
@@ -53,7 +80,7 @@ export const experience = [
     role: "Senior ABAP Consultant",
     company: "Deloitte",
     client: "BSH (Procurement)",
-    period: "May 2026 — Present",
+    start: "2026-05",
     points: [
       "Built a two-level approval process on SAP Flexible Workflow for supplier-submitted records, now used by around 78 suppliers and well received by the business team: event-driven start from the vendor portal, Fiori Inbox decisions, email notifications and application-log error tracking.",
       "Extended approver determination so first-level approvals route to the responsible purchasing-group owner instead of a fixed team.",
@@ -68,7 +95,8 @@ export const experience = [
     role: "SAP ABAP S/4HANA Developer",
     company: "Ford Motor Company",
     focus: "IERP implementation, Finance transformation & FCSD Pinnacle",
-    period: "Nov 2021 — Apr 2026",
+    start: "2021-11",
+    end: "2026-04",
     points: [
       "Key developer on FCSD Pinnacle, a full-cycle S/4HANA implementation for Finance (FICO), from blueprint to go-live, rolled out across 3 international markets on one core codebase.",
       "Led the consolidation of legacy Goods Issue, Accounts Receivable and Goods Receipt flows into one IERP interface — a single source of truth for global finance.",
@@ -84,7 +112,8 @@ export const experience = [
     role: "PL/SQL Developer / Associate Developer",
     company: "Ford Motor Company",
     focus: "Database engineering & foundation for IERP",
-    period: "Nov 2019 — Oct 2021",
+    start: "2019-11",
+    end: "2021-10",
     points: [
       "Designed and optimised PL/SQL stored procedures and triggers for transaction-level tracking and auditability.",
       "Led the PL/SQL logic for barcode systems across International Markets, enabling high-speed data capture at scale.",
@@ -92,6 +121,17 @@ export const experience = [
     ],
     tech: ["PL/SQL", "SQL", "Triggers", "Stored procedures"],
   },
+].map(withDates);
+
+// "What I build" blocks on the home page.
+// icon: workflow | rap | odata | cds | interface | migrate
+export const capabilities = [
+  { icon: "workflow", title: "Flexible Workflow", text: "Two-level approvals started from the vendor portal, decided in the Fiori Inbox, with email alerts and application-log error tracking." },
+  { icon: "rap", title: "RAP applications", text: "Managed-scenario RAP apps for FICO data management, built the Clean Core way." },
+  { icon: "odata", title: "OData V2 / V4", text: "Create and update services with business validations behind Fiori apps, plus CDS over OData V4 for real-time tracking." },
+  { icon: "cds", title: "CDS & value helps", text: "CDS views and annotations modelled for HANA, exposed as clean value helps for workflow conditions." },
+  { icon: "interface", title: "Interfaces & automation", text: "RFC and BAPI integrations between S/4HANA and ECC, daily exchange-rate loads, and finance reports that run themselves." },
+  { icon: "migrate", title: "R/3 → S/4HANA", text: "Legacy programs moved to S/4 with modern syntax — plus the post-upgrade production fixes nobody else wanted." },
 ];
 
 // kind: "Certification" | "Award" | "Education" | "Training"
